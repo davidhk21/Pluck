@@ -1,86 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
-
-import colors from '../config/colors.js';
+import { Text, View, SafeAreaView } from 'react-native';
+import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
+import { HomePageStyles } from '../styles/styles';
+
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
-
-  useEffect(() => {
-    getUserInfo();
-  }, [])
+  const [quote, setQuote] = useState('');
 
   const getUserInfo = (id = 1) => {
-    axios.get(`http://192.168.0.247:3000/${id}`)
+    axios.get(`http://192.168.0.247:3000/api/user/${id}`)
       .then(res => {
         console.log('RESPONSE: ', res.data);
         setUser(res.data[0]);
       })
       .catch(err => {
         console.error(err);
+      });
+  };
+
+  const getQuote = () => {
+    axios.get('http://192.168.0.247:3000/api/quotes')
+      .then(res => {
+        console.log('QUOTE RESPONSE: ', res.data);
+        setQuote(res.data);
       })
-  }
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+    getQuote();
+  }, []);
 
   return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.title} onPress={() => navigation.navigate('TaskList')}>Pluck</Text>
+    <SafeAreaView style={HomePageStyles.container}>
+      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList')}>Pluck</Text>
 
-        <View style={styles.infoContainer}>
-          <View>
-            <Text>12/24/2020</Text>
-          </View>
-          <View>
-            <Text>{`Want Category Budget: ${user.wants_pct}%`}</Text>
-          </View>
-          <View>
-            <Text>Available To Spend (ATS) for January 2021</Text>
-          </View>
-          <View>
-            <Text>Limit: {`${user.salary * .60 / 12 * user.wants_pct/100}`}</Text>
-          </View>
+      <View style={HomePageStyles.infoContainer}>
+        <View>
+          <Text>12/24/2020</Text>
         </View>
-
-        <View style={styles.atsTrackerContainer}>
-          <Text>ATS TRACKER GOES HERE</Text>
+        <View>
+          <Text>{`Want Category Budget: ${user.wants_pct}%`}</Text>
         </View>
-
-        <View style={styles.quoteContainer}>
-          <Text>"Learn the rules like a pro, so you can break them like an artist."</Text>
+        <View>
+          <Text>Available To Spend (ATS) for January 2021</Text>
         </View>
-
-        <View style={styles.graphContainer}>
-          <Text>ANOTHER GRAPH GOES HERE</Text>
+        <View>
+          <Text>Limit: {`${((user.salary * 0.60) / 12) * (user.wants_pct / 100)}`}</Text>
         </View>
+      </View>
 
-      </SafeAreaView>
-  )
-}
+      <View style={HomePageStyles.atsTrackerContainer}>
+        <Text>ATS TRACKER GOES HERE</Text>
+      </View>
 
-const styles = StyleSheet.create({
-  atsTrackerContainer: {
-    margin: 20
-  },
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center'
-  },
-  graphContainer: {
-    margin: 20
-  },
-  infoContainer: {
-    margin: 20
-  },
-  quoteContainer: {
-    margin: 20
-  },
-  title: {
-    color: colors.primary,
-    fontSize: 30,
-    fontWeight: 'bold'
-  }
-});
+      <View style={HomePageStyles.quoteContainer}>
+        <Text>{quote}</Text>
+      </View>
+
+      <View style={HomePageStyles.graphContainer}>
+        <Text>ANOTHER GRAPH GOES HERE</Text>
+      </View>
+
+    </SafeAreaView>
+  );
+};
+
+HomePage.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default HomePage;
