@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
 
 import colors from '../config/colors.js';
+
+import axios from 'axios';
 
 const HomePage = ({ navigation }) => {
   const [salary, setSalary] = useState(60000);
   const [wantPct, setWantPct] = useState(.30);
+
+  const makeGetRequest = () => {
+    axios.get('http://192.168.0.247:3000/')
+      .then(res => {
+        console.log('RESPONSE: ', res.data)
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
 
   return (
       <SafeAreaView style={styles.container}>
@@ -37,6 +49,8 @@ const HomePage = ({ navigation }) => {
         <View style={styles.graphContainer}>
           <Text>ANOTHER GRAPH GOES HERE</Text>
         </View>
+
+        <Button title="Press me" onPress={makeGetRequest} />
       </SafeAreaView>
   )
 }
@@ -46,7 +60,7 @@ const styles = StyleSheet.create({
     margin: 20
   },
   container: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: 'white',
     alignItems: 'center'
   },
