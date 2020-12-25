@@ -4,9 +4,9 @@ const getUserInfo = (req, res) => {
   db.query('SELECT * FROM user WHERE id=?', [req.params.id], (err, data) => {
     if (err) {
       console.error(err);
-    } else {
-      res.send(data);
+      res.status(404).send(err);
     }
+    res.status(200).send(data);
   })
 }
 

@@ -31,4 +31,4 @@ CREATE TABLE quotes (
   quote VARCHAR(1000)
 );
 
-INSERT INTO user (first_name, last_name, salary, wants_pct, curr_ats, next_month_ats) VALUES ('David', 'Kim', 60000, .30, 900, 0);
+INSERT INTO user (first_name, last_name, salary, wants_pct, curr_ats, next_month_ats) VALUES ('David', 'Kim', 60000, 30, 900, 0);

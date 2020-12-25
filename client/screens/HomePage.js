@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
 
 import colors from '../config/colors.js';
@@ -6,13 +6,17 @@ import colors from '../config/colors.js';
 import axios from 'axios';
 
 const HomePage = ({ navigation }) => {
-  const [salary, setSalary] = useState(60000);
-  const [wantPct, setWantPct] = useState(.30);
+  const [user, setUser] = useState({});
 
-  const makeGetRequest = () => {
-    axios.get('http://192.168.0.247:3000/')
+  useEffect(() => {
+    getUserInfo();
+  }, [])
+
+  const getUserInfo = (id = 1) => {
+    axios.get(`http://192.168.0.247:3000/${id}`)
       .then(res => {
-        console.log('RESPONSE: ', res.data)
+        console.log('RESPONSE: ', res.data);
+        setUser(res.data[0]);
       })
       .catch(err => {
         console.error(err);
@@ -28,13 +32,13 @@ const HomePage = ({ navigation }) => {
             <Text>12/24/2020</Text>
           </View>
           <View>
-            <Text>{`Want Category Budget: ${wantPct * 100}%`}</Text>
+            <Text>{`Want Category Budget: ${user.wants_pct}%`}</Text>
           </View>
           <View>
             <Text>Available To Spend (ATS) for January 2021</Text>
           </View>
           <View>
-            <Text>Limit: {`${salary * .60 / 12 * wantPct}`}</Text>
+            <Text>Limit: {`${user.salary * .60 / 12 * user.wants_pct/100}`}</Text>
           </View>
         </View>
 
@@ -50,7 +54,6 @@ const HomePage = ({ navigation }) => {
           <Text>ANOTHER GRAPH GOES HERE</Text>
         </View>
 
-        <Button title="Press me" onPress={makeGetRequest} />
       </SafeAreaView>
   )
 }
