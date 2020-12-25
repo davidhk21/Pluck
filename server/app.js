@@ -17,7 +17,7 @@ app.get('/api/user/:id', db.getUserInfo);
 
 // app.get('api/user/:id/completed-tasks', db.getCompletedTasks);
 
-// app.get('api/user/:id/incompleted-tasks', db.getIncompletedTasks);
+app.get('/api/user/:id/incompleted-tasks', db.getIncompletedTasks);
 
 app.get('/api/quotes', db.getQuote);
 

@@ -12,6 +12,16 @@ const getUserInfo = (req, res) => {
   });
 };
 
+const getIncompletedTasks = (req, res) => {
+  db.query('SELECT * FROM tasks WHERE user_id=? AND completed=?', [req.params.id, false], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(404).send(err);
+    }
+    res.status(200).send(data);
+  });
+};
+
 const getQuote = (req, res) => {
   const randomId = Math.floor(Math.random() * 5) + 1;
   db.query('SELECT * FROM quotes WHERE id=?', [randomId], (err, data) => {
@@ -31,5 +41,6 @@ const getQuote = (req, res) => {
 
 module.exports = {
   getUserInfo,
+  getIncompletedTasks,
   getQuote,
 };

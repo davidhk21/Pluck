@@ -13,7 +13,6 @@ const HomePage = ({ navigation }) => {
   const getUserInfo = (id = 1) => {
     axios.get(`http://192.168.0.247:3000/api/user/${id}`)
       .then(res => {
-        console.log('RESPONSE: ', res.data);
         setUser(res.data[0]);
       })
       .catch(err => {
@@ -24,7 +23,6 @@ const HomePage = ({ navigation }) => {
   const getQuote = () => {
     axios.get('http://192.168.0.247:3000/api/quotes')
       .then(res => {
-        console.log('QUOTE RESPONSE: ', res.data);
         setQuote(res.data);
       })
       .catch(err => {
