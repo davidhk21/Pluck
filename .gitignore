@@ -1,3 +1,4 @@
+# React Native Init
 node_modules/**/*
 .expo/*
 npm-debug.*
