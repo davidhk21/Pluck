@@ -77,7 +77,7 @@ const AddTask = ({ route, navigation }) => {
 
       <Button
         title="Add Task"
-        onPress={handleAddTaskSubmit}
+        onPress={() => handleAddTaskSubmit()}
       />
 
     </SafeAreaView>
