@@ -1,15 +1,15 @@
 import React from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, Button } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Task from '../components/task_list/Task';
 
-const TaskList = ({ route }) => {
-  const { tasks } = route.params;
+const TaskList = ({ route, navigation }) => {
+  const { tasks, setTasks } = route.params;
 
   return (
     <SafeAreaView>
-      <Text>Hello Task List!</Text>
+      <Text>Tasks to Pluck!</Text>
       <Text>This Month</Text>
       <View>
         {tasks.filter(task => task.category === 'This Month').map(task => <Task task={task} />)}
@@ -22,12 +22,17 @@ const TaskList = ({ route }) => {
       <View>
         {tasks.filter(task => task.category === 'Today').map(task => <Task task={task} />)}
       </View>
+      <Button
+        title="Add Task"
+        onPress={() => navigation.navigate('AddTask', { tasks, setTasks })}
+      />
     </SafeAreaView>
   );
 };
 
 TaskList.propTypes = {
   route: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
 };
 
 export default TaskList;

@@ -6,6 +6,7 @@ import React from 'react';
 
 import HomePage from './HomePage';
 import TaskList from './TaskList';
+import AddTask from './AddTask';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -21,6 +22,10 @@ const App = () => {
         <Screen
           name="TaskList"
           component={TaskList}
+        />
+        <Screen
+          name="AddTask"
+          component={AddTask}
         />
       </Navigator>
 

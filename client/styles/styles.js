@@ -3,6 +3,16 @@ import { StyleSheet } from 'react-native';
 
 import colors from './colors';
 
+const AddTaskStyles = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
+  },
+});
+
 const HomePageStyles = StyleSheet.create({
   atsTrackerContainer: {
     margin: 20,
@@ -28,4 +38,4 @@ const HomePageStyles = StyleSheet.create({
   },
 });
 
-export { HomePageStyles };
+export { HomePageStyles, AddTaskStyles };

@@ -23,7 +23,7 @@ app.get('/api/quotes', db.getQuote);
 
 // POST ROUTES
 
-// app.post('/api/user/:id/tasks', db.addTask);
+app.post('/api/user/:id/tasks', db.addTask);
 
 // UPDATE ROUTES
 

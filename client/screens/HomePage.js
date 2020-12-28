@@ -49,7 +49,7 @@ const HomePage = ({ navigation }) => {
 
   return (
     <SafeAreaView style={HomePageStyles.container}>
-      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks: tasks })}>Pluck</Text>
+      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, setTasks })}>Pluck</Text>
 
       <View style={HomePageStyles.infoContainer}>
         <View>
