@@ -8,6 +8,7 @@ import { HomePageStyles } from '../styles/styles';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
+  const [tasks, setTasks] = useState([]);
   const [quote, setQuote] = useState('');
 
   const getUserInfo = (id = 1) => {
@@ -30,14 +31,25 @@ const HomePage = ({ navigation }) => {
       });
   };
 
+  const getIncompletedTasks = (id = 1) => {
+    axios.get(`http://192.168.0.247:3000/api/user/${id}/incompleted-tasks`)
+      .then(res => {
+        setTasks(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   useEffect(() => {
     getUserInfo();
     getQuote();
+    getIncompletedTasks();
   }, []);
 
   return (
     <SafeAreaView style={HomePageStyles.container}>
-      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList')}>Pluck</Text>
+      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks: tasks })}>Pluck</Text>
 
       <View style={HomePageStyles.infoContainer}>
         <View>
