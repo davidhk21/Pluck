@@ -4,9 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import React from 'react';
 
-import HomePage from './HomePage';
-import TaskList from './TaskList';
-import AddTask from './AddTask';
+import HomePage from './screens/HomePage';
+import TaskList from './screens/TaskList';
+import AddTask from './screens/AddTask';
 
 const { Navigator, Screen } = createStackNavigator();
 

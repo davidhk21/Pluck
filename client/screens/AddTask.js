@@ -14,12 +14,10 @@ const AddTask = ({ route, navigation }) => {
   const { tasks, setTasks } = route.params;
 
   const handleSelectCategory = (e) => {
-    alert(e);
     setCategory(e);
   };
 
   const handleSelectValue = (e) => {
-    alert(e);
     setValue(e);
   };
 
@@ -33,7 +31,7 @@ const AddTask = ({ route, navigation }) => {
     axios.post(`http://192.168.0.247:3000/api/user/${id}/tasks`, options)
       .then(res => {
         console.log('ADD TASK POST REQUEST RESPONSE: ', res);
-        // setTasks(tasks.push(options));
+        setTasks(prev => [...prev, options]);
         navigation.navigate('TaskList');
       })
       .catch(err => {
