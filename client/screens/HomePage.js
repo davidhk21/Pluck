@@ -12,7 +12,7 @@ const HomePage = ({ navigation }) => {
   const [quote, setQuote] = useState('');
   const [incompletedTasks, setIncompletedTasks] = useState([]);
 
-  let limit = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
+  const limit = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
 
   const calculateATS = () => {
     let ats = 0;
