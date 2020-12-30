@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Task from '../components/task_list/Task';
 
 const TaskList = ({ route, navigation }) => {
-  const { tasks, setTasks } = route.params;
+  const { tasks, getIncompletedTasks } = route.params;
 
   return (
     <SafeAreaView>
@@ -24,7 +24,7 @@ const TaskList = ({ route, navigation }) => {
       </View>
       <Button
         title="Add Task"
-        onPress={() => navigation.navigate('AddTask', { tasks, setTasks })}
+        onPress={() => navigation.navigate('AddTask', { tasks, getIncompletedTasks })}
       />
     </SafeAreaView>
   );

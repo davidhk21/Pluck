@@ -10,6 +10,16 @@ const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
   const [tasks, setTasks] = useState([]);
   const [quote, setQuote] = useState('');
+  const [incompletedTasks, setIncompletedTasks] = useState([]);
+  const [limit, setLimit] = useState(0);
+
+  const calculateATS = () => {
+    let ats = 0;
+    for (let i = 0; i < incompletedTasks.length; i++) {
+      ats += incompletedTasks[i].value * 0.005 * limit;
+    }
+    return ats;
+  };
 
   const getUserInfo = (id = 1) => {
     axios.get(`http://192.168.0.247:3000/api/user/${id}`)
@@ -41,15 +51,27 @@ const HomePage = ({ navigation }) => {
       });
   };
 
+  const getCompletedTasks = (id = 1) => {
+    axios.get(`http://192.168.0.247:3000/api/user/${id}/completed-tasks`)
+      .then(res => {
+        setIncompletedTasks(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   useEffect(() => {
     getUserInfo();
     getQuote();
     getIncompletedTasks();
+    getCompletedTasks();
+    setLimit(((user.salary * 0.60) / 12) * (user.wants_pct / 100));
   }, []);
 
   return (
     <SafeAreaView style={HomePageStyles.container}>
-      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, setTasks })}>Pluck</Text>
+      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks })}>Pluck</Text>
 
       <View style={HomePageStyles.infoContainer}>
         <View>
@@ -62,12 +84,12 @@ const HomePage = ({ navigation }) => {
           <Text>Available To Spend (ATS) for January 2021</Text>
         </View>
         <View>
-          <Text>Limit: {`${((user.salary * 0.60) / 12) * (user.wants_pct / 100)}`}</Text>
+          <Text>Limit: {limit}</Text>
         </View>
       </View>
 
       <View style={HomePageStyles.atsTrackerContainer}>
-        <Text>ATS TRACKER GOES HERE</Text>
+        <Text>ATS TRACKER: {calculateATS()}</Text>
       </View>
 
       <View style={HomePageStyles.quoteContainer}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView, TextInput, Picker, Button } from 'react-native';
+import { Text, SafeAreaView, TextInput, Picker, Button } from 'react-native';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
@@ -11,7 +11,7 @@ const AddTask = ({ route, navigation }) => {
   const [category, setCategory] = useState('');
   const [value, setValue] = useState('');
 
-  const { tasks, setTasks } = route.params;
+  const { tasks, getIncompletedTasks } = route.params;
 
   const handleSelectCategory = (e) => {
     setCategory(e);
@@ -29,10 +29,13 @@ const AddTask = ({ route, navigation }) => {
       completed: false,
     };
     axios.post(`http://192.168.0.247:3000/api/user/${id}/tasks`, options)
-      .then(res => {
-        console.log('ADD TASK POST REQUEST RESPONSE: ', res);
-        setTasks(prev => [...prev, options]);
-        navigation.navigate('TaskList');
+      .then(() => {
+        // add new task to current list of tasks
+        tasks.push(options);
+        // update tasks state
+        getIncompletedTasks();
+        // naviate back to task list with the new task added
+        navigation.navigate('TaskList', { tasks });
       })
       .catch(err => {
         console.error(err);
@@ -83,6 +86,7 @@ const AddTask = ({ route, navigation }) => {
 };
 
 AddTask.propTypes = {
+  route: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
 };
 
