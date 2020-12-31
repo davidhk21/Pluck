@@ -65,26 +65,29 @@ const HomePage = ({ navigation }) => {
 
   return (
     <SafeAreaView style={HomePageStyles.container}>
-      <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
 
-      <Image source={require('../../assets/example.png')} style={{ width: 50, height: 50 }} />
+      <Text style={HomePageStyles.date}>{getTodaysDate()}</Text>
+
+      <View style={HomePageStyles.logoContainer}>
+        <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
+        <Image source={require('../../assets/pluck-logo.png')} style={{ width: 50, height: 50 }} />
+      </View>
 
       <View style={HomePageStyles.infoContainer}>
-        <View>
-          <Text>{getTodaysDate()}</Text>
+        <View style={HomePageStyles.wantsContainer}>
+          <Text style={HomePageStyles.wantsBudget}>Wants</Text>
+          <Text style={HomePageStyles.wantsBudgetPct}>{`${user.wants_pct}%`}</Text>
         </View>
-        <View>
-          <Text>{`Want Category Budget: ${user.wants_pct}%`}</Text>
-        </View>
-        <View>
-          <Text>Available To Spend (ATS) for January 2021</Text>
-        </View>
-        <View>
-          <Text>Limit: {limit}</Text>
+        <View style={HomePageStyles.limitContainer}>
+          <Text style={HomePageStyles.limit}>Limit</Text>
+          <Text style={HomePageStyles.limitVal}>{limit}</Text>
         </View>
       </View>
 
       <View style={HomePageStyles.atsTrackerContainer}>
+        <View>
+          <Text>Available To Spend (ATS) for January 2021</Text>
+        </View>
         <Text>ATS TRACKER: {ATS}</Text>
       </View>
 
