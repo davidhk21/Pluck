@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
   const [completed, setCompleted] = useState(0);
+  const [deleted, setDeleted] = useState(false);
 
   const handleTaskComplete = (id = 1) => {
     const options = {
@@ -25,7 +26,23 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
       });
   };
 
-  if (completed === task.completed) {
+  const handleTaskDelete = (id = 1) => {
+    const options = {
+      id: task.id,
+    };
+    axios.delete(`http://192.168.0.247:3000/api/user/${id}/incompleted-tasks`, { data: options })
+      .then(() => {
+        console.log('task is DELETED!');
+        setDeleted(true);
+        getIncompletedTasks();
+        Alert.alert('task has been DELETED!');
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  if ((completed === task.completed) && !deleted) {
     return (
       <View>
         <Text>{task.task}</Text>
@@ -33,6 +50,10 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
         <Button
           onPress={() => handleTaskComplete()}
           title="pluck!"
+        />
+        <Button
+          onPress={() => handleTaskDelete()}
+          title="Delete"
         />
       </View>
     );
