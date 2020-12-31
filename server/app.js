@@ -35,6 +35,6 @@ app.put('/api/user/:id/incompleted-tasks', db.completeTask);
 
 // DELETE ROUTES
 
-// app.delete('/api/user/:id/tasks', db.deleteTask);
+app.delete('/api/user/:id/incompleted-tasks', db.deleteTask);
 
 module.exports = app;

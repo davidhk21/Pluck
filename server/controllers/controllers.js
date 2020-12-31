@@ -70,6 +70,16 @@ const completeTask = (req, res) => {
 
 // ---------- DELETE REQUESTS ---------- //
 
+const deleteTask = (req, res) => {
+  db.query('DELETE FROM tasks WHERE id=? AND user_id=?', [req.body.id, req.params.id], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(404).send(err);
+    }
+    res.status(200).send(data);
+  });
+};
+
 module.exports = {
   getUserInfo,
   getIncompletedTasks,
@@ -77,4 +87,5 @@ module.exports = {
   getQuote,
   addTask,
   completeTask,
+  deleteTask,
 };

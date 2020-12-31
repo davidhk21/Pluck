@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, Alert } from 'react-native';
 
 import axios from 'axios';
 
@@ -18,6 +18,7 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
         setCompleted(1);
         getIncompletedTasks();
         getCompletedTasks();
+        Alert.alert('task has been plucked!');
       })
       .catch(err => {
         console.error(err);
