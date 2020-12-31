@@ -12,15 +12,15 @@ const TaskList = ({ route, navigation }) => {
       <Text>Tasks to Pluck!</Text>
       <Text>This Month</Text>
       <View>
-        {tasks.filter(task => task.category === 'This Month').map(task => <Task task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
+        {tasks.filter(task => task.category === 'This Month').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
       </View>
       <Text>This Week</Text>
       <View>
-        {tasks.filter(task => task.category === 'This Week').map(task => <Task task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
+        {tasks.filter(task => task.category === 'This Week').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
       </View>
       <Text>Today</Text>
       <View>
-        {tasks.filter(task => task.category === 'Today').map(task => <Task task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
+        {tasks.filter(task => task.category === 'Today').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
       </View>
       <Button
         title="Add Task"

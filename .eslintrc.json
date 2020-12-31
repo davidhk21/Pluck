@@ -25,6 +25,7 @@
         "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
         "react/forbid-prop-types": "off",
         "react/jsx-one-expression-per-line":"off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "react/no-array-index-key": "off"
     }
 }

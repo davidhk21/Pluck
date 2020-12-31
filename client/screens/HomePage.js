@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { HomePageStyles } from '../styles/styles';
+import { calculateATS } from '../utils/logic';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
@@ -13,14 +14,7 @@ const HomePage = ({ navigation }) => {
   const [incompletedTasks, setIncompletedTasks] = useState([]);
 
   const limit = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
-
-  const calculateATS = () => {
-    let ats = 0;
-    for (let i = 0; i < incompletedTasks.length; i++) {
-      ats += incompletedTasks[i].value * 0.005 * limit;
-    }
-    return ats;
-  };
+  const ATS = calculateATS(incompletedTasks, limit);
 
   const getUserInfo = (id = 1) => {
     axios.get(`http://192.168.0.247:3000/api/user/${id}`)
@@ -89,7 +83,7 @@ const HomePage = ({ navigation }) => {
       </View>
 
       <View style={HomePageStyles.atsTrackerContainer}>
-        <Text>ATS TRACKER: {calculateATS()}</Text>
+        <Text>ATS TRACKER: {ATS}</Text>
       </View>
 
       <View style={HomePageStyles.quoteContainer}>
