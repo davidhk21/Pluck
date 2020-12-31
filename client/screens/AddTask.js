@@ -11,7 +11,7 @@ const AddTask = ({ route, navigation }) => {
   const [category, setCategory] = useState('');
   const [value, setValue] = useState('');
 
-  const { tasks, getIncompletedTasks } = route.params;
+  const { getIncompletedTasks } = route.params;
 
   const handleSelectCategory = (e) => {
     setCategory(e);
@@ -30,12 +30,17 @@ const AddTask = ({ route, navigation }) => {
     };
     axios.post(`http://192.168.0.247:3000/api/user/${id}/tasks`, options)
       .then(() => {
-        // add new task to current list of tasks
-        tasks.push(options);
         // update tasks state
         getIncompletedTasks();
-        // naviate back to task list with the new task added
-        navigation.navigate('TaskList', { tasks });
+        // navigate back to task list with the new task added
+        axios.get(`http://192.168.0.247:3000/api/user/${id}/incompleted-tasks`)
+          .then(res => {
+            const tasks = res.data;
+            navigation.navigate('TaskList', { tasks });
+          })
+          .catch(err => {
+            console.error(err);
+          });
       })
       .catch(err => {
         console.error(err);

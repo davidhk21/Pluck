@@ -27,6 +27,8 @@ app.post('/api/user/:id/tasks', db.addTask);
 
 // UPDATE ROUTES
 
+app.put('/api/user/:id/tasks', db.completeTask);
+
 // app.put('/api/user/:id', db.updateUserInfo);
 
 // app.put('/api/user/:id/tasks', db.updateTask);

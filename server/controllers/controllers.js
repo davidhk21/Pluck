@@ -58,6 +58,16 @@ const addTask = (req, res) => {
 
 // ---------- PUT REQUESTS ---------- //
 
+const completeTask = (req, res) => {
+  db.query('UPDATE tasks SET completed = true WHERE id=? AND user_id=?', [req.body.id, req.params.id], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(404).send(err);
+    }
+    res.status(200).send(data);
+  });
+};
+
 // ---------- DELETE REQUESTS ---------- //
 
 module.exports = {
@@ -66,4 +76,5 @@ module.exports = {
   getCompletedTasks,
   getQuote,
   addTask,
+  completeTask,
 };

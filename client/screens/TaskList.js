@@ -24,7 +24,11 @@ const TaskList = ({ route, navigation }) => {
       </View>
       <Button
         title="Add Task"
-        onPress={() => navigation.navigate('AddTask', { tasks, getIncompletedTasks })}
+        onPress={() => navigation.navigate('AddTask', { getIncompletedTasks })}
+      />
+      <Button
+        title="Back To HomePage"
+        onPress={() => navigation.navigate('HomePage')}
       />
     </SafeAreaView>
   );
