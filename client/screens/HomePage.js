@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
 import { HomePageStyles } from '../styles/styles';
-import { calculateATS } from '../utils/logic';
+import { calculateATS, getTodaysDate } from '../utils/logic';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
@@ -67,9 +67,11 @@ const HomePage = ({ navigation }) => {
     <SafeAreaView style={HomePageStyles.container}>
       <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
 
+      <Image source={require('../../assets/example.png')} style={{ width: 50, height: 50 }} />
+
       <View style={HomePageStyles.infoContainer}>
         <View>
-          <Text>12/24/2020</Text>
+          <Text>{getTodaysDate()}</Text>
         </View>
         <View>
           <Text>{`Want Category Budget: ${user.wants_pct}%`}</Text>
