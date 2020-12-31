@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-import { HomePageStyles } from '../styles/styles';
+import { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles, graphStyles } from '../styles/homePageStyles';
 import { calculateATS, getTodaysDate } from '../utils/logic';
 
 const HomePage = ({ navigation }) => {
@@ -64,38 +64,36 @@ const HomePage = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={HomePageStyles.container}>
+    <SafeAreaView style={ScreenStyles.container}>
 
-      <Text style={HomePageStyles.date}>{getTodaysDate()}</Text>
+      <Text style={HeaderStyles.date}>{getTodaysDate()}</Text>
 
-      <View style={HomePageStyles.logoContainer}>
-        <Text style={HomePageStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
+      <View style={HeaderStyles.logoContainer}>
+        <Text style={HeaderStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
         <Image source={require('../../assets/pluck-logo.png')} style={{ width: 50, height: 50 }} />
       </View>
 
-      <View style={HomePageStyles.infoContainer}>
-        <View style={HomePageStyles.wantsContainer}>
-          <Text style={HomePageStyles.wantsBudget}>Wants</Text>
-          <Text style={HomePageStyles.wantsBudgetPct}>{`${user.wants_pct}%`}</Text>
+      <View style={InfoStyles.infoContainer}>
+        <View style={InfoStyles.wantsContainer}>
+          <Text style={InfoStyles.wantsBudget}>Wants</Text>
+          <Text style={InfoStyles.wantsBudgetPct}>{`${user.wants_pct}%`}</Text>
         </View>
-        <View style={HomePageStyles.limitContainer}>
-          <Text style={HomePageStyles.limit}>Limit</Text>
-          <Text style={HomePageStyles.limitVal}>{limit}</Text>
+        <View style={InfoStyles.limitContainer}>
+          <Text style={InfoStyles.limit}>Limit</Text>
+          <Text style={InfoStyles.limitVal}>{limit}</Text>
         </View>
       </View>
 
-      <View style={HomePageStyles.atsTrackerContainer}>
-        <View>
-          <Text>Available To Spend (ATS) for January 2021</Text>
-        </View>
-        <Text>ATS TRACKER: {ATS}</Text>
+      <View style={atsStyles.atsTrackerContainer}>
+        <Text style={atsStyles.atsCaption}>ATS (Available To Spend) for next month:</Text>
+        <Text style={atsStyles.atsTracker}>{ATS}</Text>
       </View>
 
-      <View style={HomePageStyles.quoteContainer}>
-        <Text>{quote}</Text>
+      <View style={quoteStyles.quoteContainer}>
+        <Text style={quoteStyles.quote}>{`"${quote}"`}</Text>
       </View>
 
-      <View style={HomePageStyles.graphContainer}>
+      <View style={graphStyles.graphContainer}>
         <Text>ANOTHER GRAPH GOES HERE</Text>
       </View>
 
