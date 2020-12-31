@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import PropTypes from 'prop-types';
 
+import { TaskStyles } from '../../styles/taskListStyles';
+
 const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
   const [completed, setCompleted] = useState(0);
   const [deleted, setDeleted] = useState(false);
@@ -44,17 +46,19 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
 
   if ((completed === task.completed) && !deleted) {
     return (
-      <View>
+      <View style={TaskStyles.container}>
         <Text>{task.task}</Text>
         <Text>{task.value}</Text>
-        <Button
-          onPress={() => handleTaskComplete()}
-          title="pluck!"
-        />
-        <Button
-          onPress={() => handleTaskDelete()}
-          title="Delete"
-        />
+        <View style={TaskStyles.buttonContainer}>
+          <Button
+            onPress={() => handleTaskComplete()}
+            title="pluck!"
+          />
+          <Button
+            onPress={() => handleTaskDelete()}
+            title="Delete"
+          />
+        </View>
       </View>
     );
   }

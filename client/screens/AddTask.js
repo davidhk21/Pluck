@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-import AddTaskStyles from '../styles/addTaskStyles';
+import { AddTaskStyles } from '../styles/addTaskStyles';
 
 const AddTask = ({ route, navigation }) => {
   const [taskName, setTaskName] = useState('');
