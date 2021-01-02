@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { VictoryBar, VictoryChart, VictoryTheme } from 'victory-native';
+import { VictoryBar, VictoryChart, VictoryTheme, VictoryAxis } from 'victory-native';
 
 import PropTypes from 'prop-types';
 
@@ -27,15 +27,44 @@ const processTasksDataToDisplay = (data) => {
 const Data = ({ completedTasks }) => {
   return (
     <View style={styles.container}>
-      <VictoryChart width={350} theme={VictoryTheme.material}>
-        <VictoryBar data={processTasksDataToDisplay(completedTasks)} x="value" y="tasks" />
+      <VictoryChart
+        width={350}
+        theme={VictoryTheme.material}
+        animate={{
+          duration: 2000,
+          onEnter: { duration: 1000 },
+        }}
+      >
+        <VictoryAxis
+          label="values"
+          style={{
+            axisLabel: {
+              padding: 30,
+            },
+          }}
+        />
+        <VictoryAxis
+          dependentAxis
+          label="# of tasks completed"
+          style={{
+            axisLabel: {
+              padding: 35,
+            },
+          }}
+        />
+        <VictoryBar
+          data={processTasksDataToDisplay(completedTasks)}
+          x="value"
+          y="tasks"
+          barRatio={0.8}
+        />
       </VictoryChart>
     </View>
   );
 };
 
 Data.propTypes = {
-  completedTasks: PropTypes.object.isRequired,
+  completedTasks: PropTypes.array.isRequired,
 };
 
 export default Data;
