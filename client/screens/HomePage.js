@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, SafeAreaView, Image } from 'react-native';
+import { Text, View, SafeAreaView, Image, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
 import { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles, graphStyles } from '../styles/homePageStyles';
 import { calculateATS, getTodaysDate } from '../utils/logic';
+
+import ReactNativeART from '../d3/index';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
@@ -65,37 +67,42 @@ const HomePage = ({ navigation }) => {
 
   return (
     <SafeAreaView style={ScreenStyles.container}>
+      <ScrollView>
+        <View style={ScreenStyles.container}>
+          <Text style={HeaderStyles.date}>{getTodaysDate()}</Text>
 
-      <Text style={HeaderStyles.date}>{getTodaysDate()}</Text>
+          <View style={HeaderStyles.logoContainer}>
+            <Text style={HeaderStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
+            <Image source={require('../../assets/pluck-logo.png')} style={{ width: 50, height: 50 }} />
+          </View>
 
-      <View style={HeaderStyles.logoContainer}>
-        <Text style={HeaderStyles.title} onPress={() => navigation.navigate('TaskList', { tasks, getIncompletedTasks, getCompletedTasks })}>Pluck</Text>
-        <Image source={require('../../assets/pluck-logo.png')} style={{ width: 50, height: 50 }} />
-      </View>
+          <View style={InfoStyles.infoContainer}>
+            <View style={InfoStyles.wantsContainer}>
+              <Text style={InfoStyles.wantsBudget}>Wants</Text>
+              <Text style={InfoStyles.wantsBudgetPct}>{`${user.wants_pct}%`}</Text>
+            </View>
+            <View style={InfoStyles.limitContainer}>
+              <Text style={InfoStyles.limit}>Limit</Text>
+              <Text style={InfoStyles.limitVal}>{limit}</Text>
+            </View>
+          </View>
 
-      <View style={InfoStyles.infoContainer}>
-        <View style={InfoStyles.wantsContainer}>
-          <Text style={InfoStyles.wantsBudget}>Wants</Text>
-          <Text style={InfoStyles.wantsBudgetPct}>{`${user.wants_pct}%`}</Text>
+          <View style={atsStyles.atsTrackerContainer}>
+            <Text style={atsStyles.atsCaption}>ATS (Available To Spend) for next month:</Text>
+            <Text style={atsStyles.atsTracker}>{ATS}</Text>
+          </View>
+
+          <ReactNativeART />
+
+          <View style={quoteStyles.quoteContainer}>
+            <Text style={quoteStyles.quote}>{`"${quote}"`}</Text>
+          </View>
+
+          <View style={graphStyles.graphContainer}>
+            <Text>ANOTHER GRAPH GOES HERE</Text>
+          </View>
         </View>
-        <View style={InfoStyles.limitContainer}>
-          <Text style={InfoStyles.limit}>Limit</Text>
-          <Text style={InfoStyles.limitVal}>{limit}</Text>
-        </View>
-      </View>
-
-      <View style={atsStyles.atsTrackerContainer}>
-        <Text style={atsStyles.atsCaption}>ATS (Available To Spend) for next month:</Text>
-        <Text style={atsStyles.atsTracker}>{ATS}</Text>
-      </View>
-
-      <View style={quoteStyles.quoteContainer}>
-        <Text style={quoteStyles.quote}>{`"${quote}"`}</Text>
-      </View>
-
-      <View style={graphStyles.graphContainer}>
-        <Text>ANOTHER GRAPH GOES HERE</Text>
-      </View>
+      </ScrollView>
 
     </SafeAreaView>
   );
