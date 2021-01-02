@@ -77,7 +77,7 @@ const quoteStyles = StyleSheet.create({
     fontSize: 20,
   },
   quoteContainer: {
-    flex: 2,
+    flex: 3,
     margin: 20,
     width: '75%',
     alignItems: 'center',
