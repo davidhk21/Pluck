@@ -5,7 +5,6 @@ import colors from './colors';
 
 const ScreenStyles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
   },
@@ -78,18 +77,11 @@ const quoteStyles = StyleSheet.create({
     fontSize: 20,
   },
   quoteContainer: {
-    flex: 1,
+    flex: 2,
     margin: 20,
     width: '75%',
     alignItems: 'center',
   },
 });
 
-const graphStyles = StyleSheet.create({
-  graphContainer: {
-    flex: 2,
-    margin: 20,
-  },
-});
-
-export { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles, graphStyles };
+export { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles };

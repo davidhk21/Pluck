@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-import { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles, graphStyles } from '../styles/homePageStyles';
+import { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles } from '../styles/homePageStyles';
 import { calculateATS, getTodaysDate } from '../utils/logic';
 
-import ReactNativeART from '../d3/index';
+import Data from '../victory/index';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
   const [tasks, setTasks] = useState([]);
   const [quote, setQuote] = useState('');
-  const [incompletedTasks, setIncompletedTasks] = useState([]);
+  const [completedTasks, setcompletedTasks] = useState([]);
 
   const limit = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
-  const ATS = calculateATS(incompletedTasks, limit);
+  const ATS = calculateATS(completedTasks, limit);
 
   const getUserInfo = (id = 1) => {
     axios.get(`http://192.168.0.247:3000/api/user/${id}`)
@@ -51,7 +51,7 @@ const HomePage = ({ navigation }) => {
   const getCompletedTasks = (id = 1) => {
     axios.get(`http://192.168.0.247:3000/api/user/${id}/completed-tasks`)
       .then(res => {
-        setIncompletedTasks(res.data);
+        setcompletedTasks(res.data);
       })
       .catch(err => {
         console.error(err);
@@ -69,6 +69,7 @@ const HomePage = ({ navigation }) => {
     <SafeAreaView style={ScreenStyles.container}>
       <ScrollView>
         <View style={ScreenStyles.container}>
+
           <Text style={HeaderStyles.date}>{getTodaysDate()}</Text>
 
           <View style={HeaderStyles.logoContainer}>
@@ -92,18 +93,14 @@ const HomePage = ({ navigation }) => {
             <Text style={atsStyles.atsTracker}>{ATS}</Text>
           </View>
 
-          <ReactNativeART />
-
           <View style={quoteStyles.quoteContainer}>
             <Text style={quoteStyles.quote}>{`"${quote}"`}</Text>
           </View>
 
-          <View style={graphStyles.graphContainer}>
-            <Text>ANOTHER GRAPH GOES HERE</Text>
-          </View>
+          <Data completedTasks={completedTasks} />
+
         </View>
       </ScrollView>
-
     </SafeAreaView>
   );
 };
