@@ -24,7 +24,7 @@ const processTasksDataToDisplay = (data) => {
   return processedData;
 };
 
-const Data = ({ completedTasks }) => {
+const BarGraph = ({ completedTasks }) => {
   return (
     <View style={styles.container}>
       <VictoryChart
@@ -57,14 +57,15 @@ const Data = ({ completedTasks }) => {
           x="value"
           y="tasks"
           barRatio={0.8}
+          alignment="start"
         />
       </VictoryChart>
     </View>
   );
 };
 
-Data.propTypes = {
+BarGraph.propTypes = {
   completedTasks: PropTypes.array.isRequired,
 };
 
-export default Data;
+export default BarGraph;

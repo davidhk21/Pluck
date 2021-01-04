@@ -31,7 +31,6 @@ const InfoStyles = StyleSheet.create({
   infoContainer: {
     margin: 20,
     flexDirection: 'row',
-    flex: 1,
   },
   wantsBudget: {
     fontSize: 20,
@@ -67,7 +66,6 @@ const atsStyles = StyleSheet.create({
   },
   atsTrackerContainer: {
     margin: 20,
-    flex: 1,
     alignItems: 'center',
   },
 });
@@ -77,7 +75,6 @@ const quoteStyles = StyleSheet.create({
     fontSize: 20,
   },
   quoteContainer: {
-    flex: 3,
     margin: 20,
     width: '75%',
     alignItems: 'center',

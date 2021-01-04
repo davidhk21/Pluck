@@ -7,7 +7,8 @@ import axios from 'axios';
 import { ScreenStyles, HeaderStyles, InfoStyles, atsStyles, quoteStyles } from '../styles/homePageStyles';
 import { calculateATS, getTodaysDate } from '../utils/logic';
 
-import Data from '../victory/index';
+import ProgressBar from '../victory/progressBar';
+import BarGraph from '../victory/barGraph';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState({});
@@ -15,8 +16,18 @@ const HomePage = ({ navigation }) => {
   const [quote, setQuote] = useState('');
   const [completedTasks, setcompletedTasks] = useState([]);
 
-  const limit = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
-  const ATS = calculateATS(completedTasks, limit);
+  const [limit, setLimit] = useState(0);
+  const [ATS, setATS] = useState(0);
+
+  const getLimit = () => {
+    const result = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
+    setLimit(result);
+  };
+
+  const getATS = () => {
+    const result = calculateATS(completedTasks, limit);
+    setATS(result);
+  };
 
   const getUserInfo = (id = 1) => {
     axios.get(`http://192.168.0.247:3000/api/user/${id}`)
@@ -65,6 +76,11 @@ const HomePage = ({ navigation }) => {
     getCompletedTasks();
   }, []);
 
+  useEffect(() => {
+    getLimit();
+    getATS();
+  }, [user, completedTasks]);
+
   return (
     <SafeAreaView style={ScreenStyles.container}>
       <ScrollView>
@@ -93,11 +109,13 @@ const HomePage = ({ navigation }) => {
             <Text style={atsStyles.atsTracker}>{ATS}</Text>
           </View>
 
+          <ProgressBar user={user} completedTasks={completedTasks} />
+
           <View style={quoteStyles.quoteContainer}>
             <Text style={quoteStyles.quote}>{`"${quote}"`}</Text>
           </View>
 
-          <Data completedTasks={completedTasks} />
+          <BarGraph completedTasks={completedTasks} />
 
         </View>
       </ScrollView>
