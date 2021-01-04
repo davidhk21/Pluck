@@ -63,7 +63,7 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
             title="Delete"
             style={TaskStyles.delete}
           >
-            <Text style={TaskStyles.deleteText}>Delete</Text>
+            <Text style={TaskStyles.deleteText}>delete</Text>
           </TouchableOpacity>
         </View>
       </View>

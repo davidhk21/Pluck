@@ -39,8 +39,7 @@ const TaskStyles = StyleSheet.create({
     color: 'white',
   },
   pluck: {
-    borderColor: colors.darkTurqoise,
-    borderWidth: 1,
+    backgroundColor: colors.darkTurqoise,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
@@ -50,7 +49,7 @@ const TaskStyles = StyleSheet.create({
     width: 75,
   },
   pluckText: {
-    color: colors.darkTurqoise,
+    color: 'white',
   },
   task: {
     color: colors.primary,
