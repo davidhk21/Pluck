@@ -25,11 +25,12 @@ const TaskList = ({ route, navigation }) => {
         <View>
           {tasks.filter(task => task.category === 'Today').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
         </View>
-
-        <Button
-          title="Back To HomePage"
+        <TouchableOpacity
           onPress={() => navigation.navigate('HomePage')}
-        />
+          style={Buttons.back}
+        >
+          <Text style={Buttons.backText}>Back</Text>
+        </TouchableOpacity>
       </SafeAreaView>
       <TouchableOpacity
         onPress={() => navigation.navigate('AddTask', { getIncompletedTasks })}

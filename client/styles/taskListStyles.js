@@ -76,6 +76,19 @@ const Buttons = StyleSheet.create({
     fontSize: 20,
     color: 'white',
   },
+  back: {
+    alignItems: 'center',
+    position: 'absolute',
+    top: 40,
+    left: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    borderRadius: 5,
+    backgroundColor: colors.primary,
+  },
+  backText: {
+    color: 'white',
+  },
 });
 
 export { Screen, TaskStyles, Texts, Buttons };
