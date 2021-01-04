@@ -6,11 +6,24 @@ import { StyleSheet } from 'react-native';
 const AddTaskStyles = StyleSheet.create({
   input: {
     borderWidth: 1,
+    borderRadius: 10,
     borderColor: '#777',
     padding: 8,
     margin: 10,
-    width: 200,
+    width: 300,
   },
 });
 
-export { AddTaskStyles };
+const Texts = StyleSheet.create({
+  enterTask: {
+    fontSize: 20,
+  },
+  chooseCategory: {
+    fontSize: 20,
+  },
+  chooseValue: {
+    fontSize: 20,
+  },
+});
+
+export { AddTaskStyles, Texts };

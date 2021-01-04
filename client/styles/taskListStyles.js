@@ -73,6 +73,7 @@ const Texts = StyleSheet.create({
   categories: {
     fontWeight: 'bold',
     fontSize: 20,
+    marginTop: 5,
   },
   header: {
     textAlign: 'center',
@@ -100,7 +101,7 @@ const Buttons = StyleSheet.create({
   back: {
     alignItems: 'center',
     position: 'absolute',
-    top: 40,
+    top: 45,
     left: 10,
     paddingHorizontal: 20,
     paddingVertical: 5,
