@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Text, SafeAreaView, TextInput, Picker, Button, Alert } from 'react-native';
+import { Text, SafeAreaView, TextInput, Button, Alert, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-import { AddTaskStyles, Texts } from '../styles/addTaskStyles';
+import { AddTaskStyles, Texts, DropDown } from '../styles/addTaskStyles';
 
 const AddTask = ({ route, navigation }) => {
   const [taskName, setTaskName] = useState('');
@@ -29,7 +29,7 @@ const AddTask = ({ route, navigation }) => {
       category,
       completed: false,
     };
-    if (category && value && taskName) {
+    if (category !== 'Select a Category' && value !== 'Select a Value' && taskName) {
       axios.post(`http://192.168.0.247:3000/api/user/${id}/tasks`, options)
         .then(() => {
           // update tasks state
@@ -54,15 +54,14 @@ const AddTask = ({ route, navigation }) => {
 
   return (
     <SafeAreaView>
-      {/* <Text>Add Task Screen!</Text> */}
-      <Text style={Texts.enterTask}>Enter task:</Text>
+      <Text style={Texts.enterTask}>Enter task</Text>
       <TextInput
         onChangeText={text => setTaskName(text)}
         placeholder="Add a task"
         style={AddTaskStyles.input}
       />
 
-      <Text style={Texts.chooseCategory}>Choose Category:</Text>
+      <Text style={Texts.chooseCategory}>Choose Category</Text>
       <DropDownPicker
         items={[
           { label: 'Select a Category', value: 'Select a Category' },
@@ -71,11 +70,14 @@ const AddTask = ({ route, navigation }) => {
           { label: 'Today', value: 'Today' },
         ]}
         defaultValue={category}
-        containerStyle={{ height: 40 }}
+        containerStyle={{ height: 60 }}
+        dropDownMaxHeight={250}
+        zIndex={2000}
         onChangeItem={handleSelectCategory}
+        style={DropDown.container}
       />
 
-      <Text style={Texts.chooseValue}>Choose Value:</Text>
+      <Text style={Texts.chooseValue}>Choose Value</Text>
       <DropDownPicker
         items={[
           { label: 'Select a Value', value: 'Select a Value' },
@@ -86,8 +88,11 @@ const AddTask = ({ route, navigation }) => {
           { label: '5', value: '5' },
         ]}
         defaultValue={value}
-        containerStyle={{ height: 40 }}
+        containerStyle={{ height: 60 }}
+        dropDownMaxHeight={250}
+        zIndex={1000}
         onChangeItem={handleSelectValue}
+        style={DropDown.container}
       />
 
       <Button

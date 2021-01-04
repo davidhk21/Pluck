@@ -9,21 +9,35 @@ const AddTaskStyles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#777',
     padding: 8,
-    margin: 10,
-    width: 300,
+    marginHorizontal: 10,
+    marginTop: 10,
+    width: '95%',
   },
 });
 
 const Texts = StyleSheet.create({
   enterTask: {
     fontSize: 20,
+    textAlign: 'center',
+    marginTop: 20,
   },
   chooseCategory: {
     fontSize: 20,
+    textAlign: 'center',
+    marginTop: 20,
   },
   chooseValue: {
     fontSize: 20,
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 
-export { AddTaskStyles, Texts };
+const DropDown = StyleSheet.create({
+  container: {
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+});
+
+export { AddTaskStyles, Texts, DropDown };
