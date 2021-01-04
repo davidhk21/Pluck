@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView, Button, TouchableOpacity } from 'react-native';
+import { Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Task from '../components/task_list/Task';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, Button, Alert } from 'react-native';
+import { Text, View, Alert, TouchableOpacity } from 'react-native';
 
 import axios from 'axios';
 
@@ -49,19 +49,22 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
       <View style={TaskStyles.container}>
         <View style={TaskStyles.taskContainer}>
           <Text style={TaskStyles.task}>{task.task}</Text>
-          <Text style={TaskStyles.value}>{task.value}</Text>
+          {/* <Text style={TaskStyles.value}>{task.value}</Text> */}
         </View>
         <View style={TaskStyles.buttonContainer}>
-          <Button
+          <TouchableOpacity
             onPress={() => handleTaskComplete()}
-            title="pluck!"
             style={TaskStyles.pluck}
-          />
-          <Button
+          >
+            <Text style={TaskStyles.pluckText}>pluck!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => handleTaskDelete()}
             title="Delete"
             style={TaskStyles.delete}
-          />
+          >
+            <Text style={TaskStyles.deleteText}>Delete</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );

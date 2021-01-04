@@ -11,40 +11,62 @@ const Screen = StyleSheet.create({
 
 const TaskStyles = StyleSheet.create({
   buttonContainer: {
-    borderColor: 'black',
-    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '50%',
   },
   container: {
-    borderColor: 'black',
+    borderColor: colors.pacificBlue,
     borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 5,
+    margin: 5,
+    borderRadius: 10,
   },
   delete: {
-    borderColor: 'black',
-    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    height: 40,
+    width: 75,
+    backgroundColor: 'red',
+  },
+  deleteText: {
+    color: 'white',
   },
   pluck: {
-    borderColor: 'black',
+    borderColor: colors.darkTurqoise,
     borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    height: 40,
+    width: 75,
+  },
+  pluckText: {
+    color: colors.darkTurqoise,
   },
   task: {
-    borderColor: 'black',
-    borderWidth: 1,
     color: colors.primary,
     fontWeight: 'bold',
   },
   taskContainer: {
-    borderColor: 'black',
-    borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '50%',
+    alignItems: 'center',
   },
-  value: {
-    borderColor: 'black',
-    borderWidth: 1,
-    marginRight: 10,
-  },
+  // value: {
+  //   borderColor: 'black',
+  //   borderWidth: 1,
+  //   marginRight: 10,
+  // },
 
 });
 
