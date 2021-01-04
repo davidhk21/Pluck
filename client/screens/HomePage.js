@@ -100,13 +100,13 @@ const HomePage = ({ navigation }) => {
             </View>
             <View style={InfoStyles.limitContainer}>
               <Text style={InfoStyles.limit}>Limit</Text>
-              <Text style={InfoStyles.limitVal}>{limit}</Text>
+              <Text style={InfoStyles.limitVal}>{`$${limit}`}</Text>
             </View>
           </View>
 
           <View style={atsStyles.atsTrackerContainer}>
             <Text style={atsStyles.atsCaption}>ATS (Available To Spend) for next month:</Text>
-            <Text style={atsStyles.atsTracker}>{ATS}</Text>
+            <Text style={atsStyles.atsTracker}>{`$${ATS}`}</Text>
           </View>
 
           <ProgressBar user={user} completedTasks={completedTasks} />

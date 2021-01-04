@@ -30,10 +30,10 @@ const BarGraph = ({ completedTasks }) => {
       <VictoryChart
         width={350}
         theme={VictoryTheme.material}
-        animate={{
-          duration: 2000,
-          onEnter: { duration: 1000 },
-        }}
+        // animate={{
+        //   duration: 2000,
+        //   onEnter: { duration: 1000 },
+        // }}
       >
         <VictoryAxis
           label="values"

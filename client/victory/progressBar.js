@@ -1,26 +1,27 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { VictoryPie } from 'victory-native';
 
 import PropTypes from 'prop-types';
 
 import { calculateATS } from '../utils/logic';
 
-const getData = (user, completedTasks) => {
+const ProgressBar = ({ user, completedTasks }) => {
   const limit = ((user.salary * 0.60) / 12) * (user.wants_pct / 100);
   const ATS = calculateATS(completedTasks, limit);
-  const result = Math.floor((ATS / limit) * 100);
-  return [{ x: 1, y: result }, { x: 2, y: 100 - result }];
-};
 
-const ProgressBar = ({ user, completedTasks }) => {
+  const getData = () => {
+    const result = Math.floor((ATS / limit) * 100);
+    return [{ x: 1, y: result }, { x: 2, y: 100 - result }];
+  };
+
   return (
     <View>
       <VictoryPie
         // animate={{ duration: 1000 }}
         width={300}
         height={300}
-        data={getData(user, completedTasks)}
+        data={getData()}
         innerRadius={120}
         cornerRadius={25}
         labels={() => null}
@@ -32,6 +33,10 @@ const ProgressBar = ({ user, completedTasks }) => {
           },
         }}
       />
+
+      <View style={{ position: 'absolute', top: '42%', left: '35%' }}>
+        <Text style={{ fontSize: 30, fontWeight: 'bold' }}>{`${Math.floor((ATS / limit) * 100)}%`}</Text>
+      </View>
     </View>
   );
 };
