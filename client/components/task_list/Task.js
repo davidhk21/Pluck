@@ -47,16 +47,20 @@ const Task = ({ task, getIncompletedTasks, getCompletedTasks }) => {
   if ((completed === task.completed) && !deleted) {
     return (
       <View style={TaskStyles.container}>
-        <Text>{task.task}</Text>
-        <Text>{task.value}</Text>
+        <View style={TaskStyles.taskContainer}>
+          <Text style={TaskStyles.task}>{task.task}</Text>
+          <Text style={TaskStyles.value}>{task.value}</Text>
+        </View>
         <View style={TaskStyles.buttonContainer}>
           <Button
             onPress={() => handleTaskComplete()}
             title="pluck!"
+            style={TaskStyles.pluck}
           />
           <Button
             onPress={() => handleTaskDelete()}
             title="Delete"
+            style={TaskStyles.delete}
           />
         </View>
       </View>

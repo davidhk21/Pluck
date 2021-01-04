@@ -1,36 +1,43 @@
 import React from 'react';
-import { Text, View, SafeAreaView, Button } from 'react-native';
+import { Text, View, SafeAreaView, Button, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Task from '../components/task_list/Task';
+
+import { Texts, Buttons, Screen } from '../styles/taskListStyles';
 
 const TaskList = ({ route, navigation }) => {
   const { tasks, getIncompletedTasks, getCompletedTasks } = route.params;
 
   return (
-    <SafeAreaView>
-      <Text>Tasks to Pluck!</Text>
-      <Text>This Month</Text>
-      <View>
-        {tasks.filter(task => task.category === 'This Month').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
-      </View>
-      <Text>This Week</Text>
-      <View>
-        {tasks.filter(task => task.category === 'This Week').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
-      </View>
-      <Text>Today</Text>
-      <View>
-        {tasks.filter(task => task.category === 'Today').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
-      </View>
-      <Button
-        title="Add Task"
+    <View style={Screen.container}>
+      <SafeAreaView>
+        <Text style={Texts.header}>Tasks to Pluck!</Text>
+        <Text style={Texts.categories}>This Month</Text>
+        <View>
+          {tasks.filter(task => task.category === 'This Month').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
+        </View>
+        <Text style={Texts.categories}>This Week</Text>
+        <View>
+          {tasks.filter(task => task.category === 'This Week').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
+        </View>
+        <Text style={Texts.categories}>Today</Text>
+        <View>
+          {tasks.filter(task => task.category === 'Today').map((task, idx) => <Task key={idx} task={task} getIncompletedTasks={getIncompletedTasks} getCompletedTasks={getCompletedTasks} />)}
+        </View>
+
+        <Button
+          title="Back To HomePage"
+          onPress={() => navigation.navigate('HomePage')}
+        />
+      </SafeAreaView>
+      <TouchableOpacity
         onPress={() => navigation.navigate('AddTask', { getIncompletedTasks })}
-      />
-      <Button
-        title="Back To HomePage"
-        onPress={() => navigation.navigate('HomePage')}
-      />
-    </SafeAreaView>
+        style={Buttons.addTask}
+      >
+        <Text style={Buttons.addTaskText}>+</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
