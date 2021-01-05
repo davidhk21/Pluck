@@ -21,7 +21,7 @@ const HeaderStyles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: colors.primary,
+    color: colors.darkTurqoise,
     fontSize: 30,
     fontWeight: 'bold',
   },

@@ -6,6 +6,7 @@ import colors from './colors';
 const Screen = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
 });
 
