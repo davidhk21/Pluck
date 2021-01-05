@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Text, SafeAreaView, TextInput, Button, Alert, View } from 'react-native';
+import { Text, SafeAreaView, TextInput, Button, Alert, View, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
-import { AddTaskStyles, Texts, DropDown } from '../styles/addTaskStyles';
+import { AddTaskStyles, Texts, DropDown, Buttons } from '../styles/addTaskStyles';
 
 const AddTask = ({ route, navigation }) => {
   const [taskName, setTaskName] = useState('');
@@ -95,10 +95,28 @@ const AddTask = ({ route, navigation }) => {
         style={DropDown.container}
       />
 
-      <Button
+      {/* <Button
         title="Add Task"
         onPress={() => handleAddTaskSubmit()}
-      />
+      /> */}
+
+      <View style={Buttons.buttonsContainer}>
+        <TouchableOpacity
+          onPress={() => handleAddTaskSubmit()}
+          style={Buttons.addTask}
+        >
+          <Text style={Buttons.addTaskText}>Add Task</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={Buttons.buttonsContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={Buttons.goBack}
+        >
+          <Text style={Buttons.goBackText}>Back To Task List</Text>
+        </TouchableOpacity>
+      </View>
 
     </SafeAreaView>
   );
