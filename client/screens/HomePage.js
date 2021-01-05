@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, SafeAreaView, Image, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, Image, ScrollView, LogBox } from 'react-native';
 import PropTypes from 'prop-types';
 
 import axios from 'axios';
@@ -126,5 +126,9 @@ const HomePage = ({ navigation }) => {
 HomePage.propTypes = {
   navigation: PropTypes.object.isRequired,
 };
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 export default HomePage;

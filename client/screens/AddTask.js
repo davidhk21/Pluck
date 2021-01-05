@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, SafeAreaView, TextInput, Button, Alert, View, TouchableOpacity } from 'react-native';
+import { Text, SafeAreaView, TextInput, Alert, View, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import PropTypes from 'prop-types';
 
